@@ -2,7 +2,10 @@
   "dependencies": {
     "@inquirer/prompts": "^5.0.6",
     "airtable": "^0.12.2",
-    "express": "^4.19.2"
+    "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "opener": "^1.5.2"
   },
   "name": "airtable-web-api-cli",
   "description": "A simple CLI for interacting with the Airtable Web API",
