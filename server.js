@@ -23,10 +23,9 @@ export function setupServer() {
                     
                 }),
             }).then((response) => {
-                process.env.AIRTABLE_ACCESS_TOKEN = response.access_token;
+                process.env.AIRTABLE_ACCESS_TOKEN = response.data.access_token;
+                res.status(200).send("Authorization complete, you may now close this window.");
             });
-            console.log(process.env.AIRTABLE_ACCESS_TOKEN);
-            res.status(200).send("Authorization complete, you may now close this window.");
         } catch (error) {
             console.log(error)
         }
