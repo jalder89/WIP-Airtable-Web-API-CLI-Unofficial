@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "airtable": "^0.12.2"
+  },
+  "name": "airtable-web-api-cli",
+  "description": "A simple CLI for interacting with the Airtable Web API",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jalder89/Airtable-Web-API-CLI.git"
+  },
+  "keywords": [
+    "Airtable",
+    "CLI"
+  ],
+  "author": "Jessica Alder",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jalder89/Airtable-Web-API-CLI/issues"
+  },
+  "homepage": "https://github.com/jalder89/Airtable-Web-API-CLI#readme"
+}
