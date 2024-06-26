@@ -1,12 +1,14 @@
 {
   "dependencies": {
-    "airtable": "^0.12.2"
+    "@inquirer/prompts": "^5.0.6",
+    "airtable": "^0.12.2",
+    "express": "^4.19.2"
   },
   "name": "airtable-web-api-cli",
   "description": "A simple CLI for interacting with the Airtable Web API",
   "version": "1.0.0",
+  "type": "module",
   "main": "app.js",
-  "devDependencies": {},
   "scripts": {
     "test": "node app.js"
   },
