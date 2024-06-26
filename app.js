@@ -2,6 +2,7 @@ import { setupServer, stopServer } from "./server.js";
 import { selectMenu } from "./inquirer/inquirer-utils.js";
 import inquirerConfigs from "./inquirer/inquirer-config.js";
 import startAuthFlow from "./airtable/oauth.js";
+import { createRecords } from "./airtable/api.js";
 import 'dotenv/config'
 
 let menuChoice = "";
@@ -20,6 +21,9 @@ while(menuChoice !== "exit") {
             } catch (error) {
                 console.log(error);
             }
+            break;
+        case "createRecord":
+            await createRecords();
             break;
         case "exit":
             stopServer();
