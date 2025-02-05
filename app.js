@@ -1,7 +1,7 @@
 import { setupServer, stopServer } from "./server.js";
 import { selectMenu } from "./inquirer/inquirer-utils.js";
 import inquirerConfigs from "./inquirer/inquirer-config.js";
-import startAuthFlow from "./airtable/oauth.js";
+import { startAuthFlow, refreshAuthFlow } from "./airtable/oauth.js";
 import { createRecords } from "./airtable/api.js";
 import 'dotenv/config'
 
@@ -13,10 +13,21 @@ while(menuChoice !== "exit") {
     switch (menuChoice) {
         case "login":
             try {
-                if(!process.env.TOKEN){
+                if(!process.env.AIRTABLE_ACCESS_TOKEN){
                     await startAuthFlow();
                 } else {
                     console.log("Token already exists");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            break;
+        case "refresh-login":
+            try {
+                if(process.env.AIRTABLE_ACCESS_TOKEN){
+                    await refreshAuthFlow();
+                } else {
+                    console.log("No token to refresh");
                 }
             } catch (error) {
                 console.log(error);

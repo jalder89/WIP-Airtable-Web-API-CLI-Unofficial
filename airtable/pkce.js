@@ -28,7 +28,7 @@ function generateVerifier() {
     authorizationUrl.searchParams.set('client_id', process.env.AIRTABLE_CLIENT_ID);
     authorizationUrl.searchParams.set('redirect_uri', `http://localhost:${process.env.PORT || 3000}/oauth/redirect`);
     authorizationUrl.searchParams.set('response_type', 'code');
-    authorizationUrl.searchParams.set('scope', "data.records:read data.records:write data.recordComments:read data.recordComments:write schema.bases:read schema.bases:write webhook:manage");
+    authorizationUrl.searchParams.set('scope', "data.records:read data.records:write schema.bases:read schema.bases:write webhook:manage");
     return authorizationUrl.toString();
   }
   

@@ -13,17 +13,17 @@ async function createRecordFlow() {
         choices: [
             {
                 name: "To-Do",
-                value: "To-Do",
+                value: "Todo",
                 description: "This task needs to be done"
             },
             {
-                name: "Pending",
-                value: "Pending",
+                name: "In progress",
+                value: "In progress",
                 description: "This task is pending review"
             },
             {
-                name: "Completed",
-                value: "Completed",
+                name: "Done",
+                value: "Done",
                 description: "This task has been completed"
             }
         ]
