@@ -14,6 +14,33 @@ export async function startAuthFlow() {
     }
 }
 
+export async function createAuth(req, res) {
+    try {
+        await axios({
+            method: "post",
+            url: "https://airtable.com/oauth2/v1/token",
+            headers: {
+                "Authorization": `Basic ${process.env.AIRTABLE_ENCODED_CREDENTIALS}`,
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            data: qs.stringify ({
+                code: req.query.code,
+                client_id: process.env.AIRTABLE_CLIENT_ID,
+                redirect_uri: `http://localhost:${process.env.PORT || 3000}/oauth/redirect`,
+                grant_type: "authorization_code",
+                code_verifier: process.env.PKCE_CODE_VERIFIER
+                
+            }),
+        }).then((response) => {
+            process.env.AIRTABLE_ACCESS_TOKEN = response.data.access_token;
+            process.env.AIRTABLE_REFRESH_TOKEN = response.data.refresh_token;
+            res.status(200).send("Authorization complete, you may now close this window.");
+        });
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function refreshAuthFlow() {
     try {
         console.log("Refreshing token...");
