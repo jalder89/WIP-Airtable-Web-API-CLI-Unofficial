@@ -18,9 +18,10 @@ This is a work in progress, things will be unfinished and may be broken while un
 10. Save your OAuth Integration.
 
 ## Generating Encoded Credentials for Basic Auth
-1. Generate a Base64 encoded string for clientID:clientSecret by opening a terminal that has openssl and adjust this command `echo -n clientID:clientSecret | openssl base64`
-   * **NOTE**: Terminal includes line breaks, make sure to remove line breaks when saving the string. It should be a single line of text. I do not recommend using online tools for base64 encoding a security string.
-2. Save your newly encoded credentials from openssl to .env as `AIRTABLE_ENCODED_CREDENTIALS="opensslOutputWithoutLineBreaks"`
+1. Generate a Base64 encoded string for clientID:clientSecret by opening a terminal that has openssl and adjust this command:
+   * `echo -n clientID:clientSecret | openssl base64`
+     * **NOTE**: Terminal output includes line breaks, make sure to remove line breaks when saving the string. It should be a single line of text. I do not recommend using online tools for base64 encoding a security string.
+3. Save your newly encoded credentials from openssl to .env as `AIRTABLE_ENCODED_CREDENTIALS="opensslOutputWithoutLineBreaks"`
 
 ## Setup Variables for Record Creation
 At this time finding and selecting bases, tables, and records is not yet supported. So to create a record in a table you will need to setup an environment variable for your desired Base and Table.
