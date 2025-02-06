@@ -14,7 +14,7 @@ This is a work in progress, things will be unfinished and may be broken while un
 ### Environment Variables Required for Auth
 * AIRTABLE_CLIENT_ID
 * AIRTABLE_CLIENT_SECRET
-* AIRTABLE_ENCODED_CREDENTIALS
+* AIRTABLE_ENCODED_CREDENTIALS - Base64 encoded string representation of clientID:clientSecret
 
 ### Environment Variables Require for Create Record
 * AIRTABLE_BASE_ID
