@@ -15,7 +15,7 @@ function generateVerifier() {
     return codeChallenge;
   }
 
-  // Adjust Auth Server here - Update state param of authURI with Auth Server ID as well, this is how app.js sets the auth server
+  // Adjust query params for authroize redirect here
   async function generateAuthURI() {
     const state = crypto.randomBytes(100).toString('base64url');
     process.env.PKCE_CODE_VERIFIER = generateVerifier();
