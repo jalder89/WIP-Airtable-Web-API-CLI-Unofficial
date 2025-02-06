@@ -14,8 +14,8 @@ This is a work in progress, things will be unfinished and may be broken while un
 6. Set Redirect URI to http://localhost:3000/oauth/redirect and save.
 7. Set the Scopes for your app, the current CLI can create records and so `data.records:write` is required, no others are currently used. 
 8. Save your Client ID to your .env file as `AIRTABLE_CLIENT_ID="clientIDGoesHere"`
-9. Still in your OAuth Integration page, generate a client secret and save it somewhere safe then add it to your .env file as `AIRTABLE_CLIENT_SECRET="addSecretHere"`
-10. Save your OAuth Integration.
+9. Still in your OAuth Integration page, generate a client secret and save it somewhere safe then add it to your app's .env file as `AIRTABLE_CLIENT_SECRET="addSecretHere"`
+10. Save your OAuth Integration using the save button at the bottom of the OAuth Integration page.
 
 ## Generating Encoded Credentials for Basic Auth
 1. Generate a Base64 encoded string for clientID:clientSecret by opening a terminal that has openssl and adjust this command:
