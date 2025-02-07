@@ -1,12 +1,12 @@
 import fs from 'fs';
+import 'dotenv/config'
+import chalk from 'chalk';
 import { setupServer, stopServer } from "./server.js";
 import { selectMenu, inputMenu } from "./inquirer/inquirer-utils.js";
 import { getMenuConfig } from "./inquirer/inquirer-config.js";
 import { startAuthFlow, refreshAuthFlow } from "./airtable/oauth.js";
 import { createRecords, listBases, listRecords } from "./airtable/api.js";
 import { createTokenFile, readTokenFile } from "./airtable/utils.js";
-import chalk from 'chalk';
-import 'dotenv/config'
 
 
 setupServer();

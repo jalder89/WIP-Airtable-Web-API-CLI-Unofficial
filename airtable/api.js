@@ -2,6 +2,7 @@ import axios from "axios"
 import inquiryFlows from "../inquirer/inquirer-flows.js";
 import { getMenuConfig } from "../inquirer/inquirer-config.js";
 
+
 export async function createRecords() {
     const fields = await inquiryFlows.createRecordFlow();
     axios({

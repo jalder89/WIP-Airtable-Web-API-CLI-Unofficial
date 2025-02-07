@@ -1,10 +1,9 @@
-import axios from "axios"
 import qs from 'qs';
-import fs from 'fs';
-import path from 'path';
-import { generateAuthURI } from "./pkce.js"
+import axios from "axios"
 import opener from "opener"
+import { generateAuthURI } from "./pkce.js"
 import { updateTokenFile } from "./utils.js";
+
 
 function logError(error) {
     console.error("OAuth Error:", error?.response?.data || error.message);

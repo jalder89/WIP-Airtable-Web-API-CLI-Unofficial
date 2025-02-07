@@ -1,6 +1,7 @@
 import { Separator } from "@inquirer/prompts";
 import chalk from "chalk";
 
+
 let mainMenuConfig = {
     message: "Select an option",
     choices: []

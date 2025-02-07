@@ -1,5 +1,6 @@
 import crypto from "crypto"
 
+
 function generateVerifier() {
     return crypto.randomBytes(96).toString('base64url'); // 128 characters
   }
