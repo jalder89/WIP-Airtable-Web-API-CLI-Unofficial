@@ -7,6 +7,7 @@ let server = null;
 export function setupServer() {
     app.get('/oauth/redirect', async (req, res) => {
         await createAuth(req, res);
+        process.env.WAITING = "false";
     });
     server = app.listen(Number(process.env.PORT || 3000));
 }
