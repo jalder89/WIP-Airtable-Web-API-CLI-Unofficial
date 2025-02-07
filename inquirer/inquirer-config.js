@@ -17,7 +17,7 @@ const theme = {
 export async function getMenuConfig(menu, apiResponse = "None") {
     switch (menu) {
         case "main":
-            if(!process.env.AIRTABLE_REFRESH_TOKEN){
+            if(!process.env.AIRTABLE_REFRESH_TOKEN || process.env.AIRTABLE_REFRESH_TOKEN === "undefined"){
                 mainMenuConfig.choices = [
                     new Separator(theme.decorator(" =") + theme.style.separator(" WIP Airtable CLI ") + theme.decorator("= ")),
                     {
@@ -31,7 +31,7 @@ export async function getMenuConfig(menu, apiResponse = "None") {
                         description: "Exit CLI"
                     }
                 ]
-            } else if (!process.env.AIRTABLE_BASE_ID) {
+            } else if (!process.env.AIRTABLE_BASE_ID || process.env.AIRTABLE_BASE_ID === "undefined") {
                 mainMenuConfig.choices = [
                     new Separator(theme.decorator(" =") + theme.style.separator(" WIP Airtable CLI ") + theme.decorator("= ")),
                     {
@@ -50,7 +50,7 @@ export async function getMenuConfig(menu, apiResponse = "None") {
                         description: "Exit CLI"
                     }
                 ]
-            } else if (process.env.AIRTABLE_BASE_ID && !process.env.AIRTABLE_TABLE_NAME) {
+            } else if (process.env.AIRTABLE_BASE_ID && (!process.env.AIRTABLE_TABLE_NAME || process.env.AIRTABLE_TABLE_NAME === "undefined")) {
                 mainMenuConfig.choices = [
                     new Separator(theme.decorator(" =") + theme.style.separator(" WIP Airtable CLI ") + theme.decorator("= ")),
                     {

@@ -40,6 +40,7 @@ export async function createAuth(req, res) {
             process.env.AIRTABLE_ACCESS_TOKEN = response.data.access_token;
             process.env.AIRTABLE_REFRESH_TOKEN = response.data.refresh_token;
             updateTokenFile(process.env.AIRTABLE_REFRESH_TOKEN);
+            res.send("Authorization complete, you may now close this window.")
         });
     } catch (error) {
         logError(error);

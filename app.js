@@ -13,14 +13,14 @@ setupServer();
 
 let menu = "main"
 let menuChoice = "";
-let waiting = "";
+process.env.WAITING = "false";
 
 console.log("Loading...");
 if(!fs.existsSync('./airtable/store.json')){
     console.log("No token file found...");
     console.log("Creating file...");
     try {
-        createTokenFile();
+        await createTokenFile();
     } catch (error) {
         console.log("Error creating token file...");
         
@@ -28,22 +28,23 @@ if(!fs.existsSync('./airtable/store.json')){
 } else {
     console.log("Checking token...");
     readTokenFile();
-    try {
-        await refreshAuthFlow();
-    } catch (error) {
-        console.log("Token expired, please login again...");
-    }
+    if(process.env.AIRTABLE_REFRESH_TOKEN && process.env.AIRTABLE_REFRESH_TOKEN !== "undefined") {
+        try {
+            await refreshAuthFlow();
+        } catch (error) {
+            console.log("Token expired, please login again...");
+        }
+    } 
 }
 
 while(menuChoice !== "exit") {
-    waiting = process.env.WAITING;
-    if (waiting == "false") {
+    if (process.env.WAITING == "false") {
         let menuConfig = await getMenuConfig(menu);
         menuChoice = await selectMenu(menuConfig);
         switch (menuChoice) {
             case "login":
                 try {
-                    if(!process.env.AIRTABLE_REFRESH_TOKEN){
+                    if(!process.env.AIRTABLE_REFRESH_TOKEN || process.env.AIRTABLE_REFRESH_TOKEN === "undefined"){
                         await startAuthFlow();
                         console.log("Awaiting login grant...");
                         process.env.WAITING = "true";

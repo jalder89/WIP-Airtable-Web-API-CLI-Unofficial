@@ -15,10 +15,10 @@ export const createTokenFile = async () => {
     
     if (!fs.existsSync(tokenPath)) {
         fs.writeFileSync(tokenPath, JSON.stringify({}, null, 2));
-    } else {
-        const tokens = JSON.parse(fs.readFileSync(tokenPath));
-        process.env.AIRTABLE_REFRESH_TOKEN = tokens.refresh_token;
     }
+    
+    const tokens = JSON.parse(fs.readFileSync(tokenPath));
+    process.env.AIRTABLE_REFRESH_TOKEN = tokens.refresh_token;
 }
 
 export const updateTokenFile = async (refreshToken) => {
@@ -31,5 +31,5 @@ export const updateTokenFile = async (refreshToken) => {
 export const readTokenFile = async () => {
     const tokenPath = path.join(__dirname, './store.json');
     const storedToken = JSON.parse(fs.readFileSync(tokenPath));
-    process.env.AIRTABLE_REFRESH_TOKEN = storedToken.refresh_token;
+    process.env.AIRTABLE_REFRESH_TOKEN = storedToken?.refresh_token;
 }
