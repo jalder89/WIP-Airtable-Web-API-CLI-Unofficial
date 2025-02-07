@@ -1,8 +1,14 @@
 import axios from "axios"
 import qs from 'qs';
+import fs from 'fs';
+import path from 'path';
 import { generateAuthURI } from "./pkce.js"
 import opener from "opener"
+import { updateTokenFile } from "./utils.js";
 
+function logError(error) {
+    console.error("OAuth Error:", error?.response?.data || error.message);
+}
 
 export async function startAuthFlow() {
     try {
@@ -10,7 +16,7 @@ export async function startAuthFlow() {
         const authURI = await generateAuthURI();
         opener(authURI);
     } catch (error) {
-        console.log(error);
+        logError(error);
     }
 }
 
@@ -34,10 +40,11 @@ export async function createAuth(req, res) {
         }).then((response) => {
             process.env.AIRTABLE_ACCESS_TOKEN = response.data.access_token;
             process.env.AIRTABLE_REFRESH_TOKEN = response.data.refresh_token;
-            res.status(200).send("Authorization complete, you may now close this window.");
+            updateTokenFile(process.env.AIRTABLE_REFRESH_TOKEN);
         });
     } catch (error) {
-        console.log(error)
+        logError(error);
+        res.status(500).send("Authorization failed, please try again.");
     }
 }
 
@@ -57,9 +64,10 @@ export async function refreshAuthFlow() {
             console.log(response.statusText);
             process.env.AIRTABLE_ACCESS_TOKEN = response.data.access_token;
             process.env.AIRTABLE_REFRESH_TOKEN = response.data.refresh_token;
+            updateTokenFile(process.env.AIRTABLE_REFRESH_TOKEN);
             console.log("Refresh complete, you may now continue working.");
         });
     } catch (error) {
-        console.log(error);
+        logError(error);
     }
 }

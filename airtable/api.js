@@ -1,5 +1,6 @@
 import axios from "axios"
 import inquiryFlows from "../inquirer/inquirer-flows.js";
+import { getMenuConfig } from "../inquirer/inquirer-config.js";
 
 export async function createRecords() {
     const fields = await inquiryFlows.createRecordFlow();
@@ -13,5 +14,29 @@ export async function createRecords() {
         data: {
             fields: fields
         }
+    });
+}
+
+export async function listBases() {
+    return axios({
+        method: "get",
+        url: `https://api.airtable.com/v0/meta/bases`,
+        headers: {
+            Authorization: `Bearer ${process.env.AIRTABLE_ACCESS_TOKEN}`,
+        }
+    }).then((response) => {
+        return getMenuConfig("selectBase", response.data);
+    });
+}
+
+export async function listRecords(baseId, tableName, limit = 5) {
+    return axios({
+        method: "get",
+        url: `https://api.airtable.com/v0/${baseId}/${encodeURI(tableName)}?pageSize=5&maxRecords=${limit}`,
+        headers: {
+            Authorization: `Bearer ${process.env.AIRTABLE_ACCESS_TOKEN}`,
+        }
+    }).then((response) => {
+        return response;
     });
 }

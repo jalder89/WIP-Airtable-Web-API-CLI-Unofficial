@@ -10,3 +10,7 @@ export async function inputMenu(message) {
         message: message,
     });
 }
+
+export async function getMenu(menuName) {
+    
+}
