@@ -14,7 +14,7 @@ This is a work in progress, things will be unfinished and may be broken while un
 ## Airtable OAuth Integration Setup
 1. Create an OAuth Integration with a name of your choosing at https://airtable.com/create/oauth
 2. Set Redirect URI to http://localhost:3000/oauth/redirect and save.
-3. Set the Scopes for your app, the current CLI can create records and so `data.records:write` is required, no others are currently used. 
+3. Set the Scopes for your app, the current CLI can create records and read data so `data.records:read` and `data.records:write` are required, no others are currently used. 
 4. Save your Client ID to your .env file as `AIRTABLE_CLIENT_ID="clientIDGoesHere"`
 5. Still in your OAuth Integration page, generate a client secret and save it somewhere safe then add it to your app's .env file as `AIRTABLE_CLIENT_SECRET="addSecretHere"`
 6. Save your OAuth Integration using the save button at the bottom of the OAuth Integration page.
