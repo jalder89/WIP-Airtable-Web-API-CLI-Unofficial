@@ -1,7 +1,8 @@
 import qs from 'qs';
 import axios from "axios"
 import opener from "opener"
-import { generateAuthURI } from "./pkce.js"
+import crypto from "crypto"
+import { getPKCECodeChallenge } from "./pkce.js"
 import { updateTokenFile } from "./utils.js";
 
 
@@ -9,16 +10,27 @@ function logError(error) {
     console.error("OAuth Error:", error?.response?.data || error.message);
 }
 
+// Construct the Authorization URL and open it in the users browser to prepare for auth code redirection
 export async function startAuthFlow() {
     try {
-        console.log("Getting token");
-        const authURI = await generateAuthURI();
-        opener(authURI);
+        console.log("Starting Auth Flow");
+        const authorizationUrl = new URL(`https://airtable.com/oauth2/v1/authorize`);
+        const state = crypto.randomBytes(100).toString('base64url');
+        const codeChallenge = await getPKCECodeChallenge();
+        authorizationUrl.searchParams.set('code_challenge', codeChallenge);
+        authorizationUrl.searchParams.set('code_challenge_method', "S256");
+        authorizationUrl.searchParams.set('state', state);
+        authorizationUrl.searchParams.set('client_id', process.env.AIRTABLE_CLIENT_ID);
+        authorizationUrl.searchParams.set('redirect_uri', `http://localhost:${process.env.PORT || 3000}/oauth/redirect`);
+        authorizationUrl.searchParams.set('response_type', 'code');
+        authorizationUrl.searchParams.set('scope', "data.records:read data.records:write schema.bases:read schema.bases:write webhook:manage");
+        opener(authorizationUrl.toString());
     } catch (error) {
         logError(error);
     }
 }
 
+// Construct token request to mint an Auth Token
 export async function createAuth(req, res) {
     try {
         await axios({
